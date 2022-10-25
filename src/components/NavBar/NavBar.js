@@ -14,10 +14,10 @@ const NavBar = () => {
           <Navbar.Brand className="fs-3 ms-0 ms-lg-3" href="/">Learning Buzz</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Link className="text-white fw-semibold ms-5 text-decoration-none" to='/courses'>Courses</Link>
-              <Link className="text-white fw-semibold text-decoration-none ms-4" to='/faq'>FAQ</Link>
-              <Link className="text-white fw-semibold text-decoration-none ms-4" to='/blog'>Blog</Link>
+            <Nav className="me-auto mt-3 mt-lg-0">
+              <Link className="text-white fw-semibold ms-0 ms-lg-5 text-decoration-none" to='/courses'>Courses</Link>
+              <Link className="text-white fw-semibold text-decoration-none ms-0 ms-lg-4" to='/blog'>Blog</Link>
+              <Link className="text-white fw-semibold text-decoration-none ms-0 ms-lg-4" to='/faq'>FAQ</Link>
             </Nav>
             <Nav className="me-5">
               <Link className="text-white fw-semibold text-decoration-none me-5" to='/login' href="#memes">
