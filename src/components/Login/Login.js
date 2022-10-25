@@ -4,8 +4,32 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { FaGithub } from 'react-icons/fa';
 import {FcGoogle} from 'react-icons/fc'
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const {signInWithGoogle, signInWithGithub} = useContext(AuthContext);
+
+
+
+  const handleGoogleSignIN = () => {
+    signInWithGoogle()
+    .then(result => {
+      const user  = result.user;
+      console.log(user);
+    })
+    .catch(error => console.error('error ', error))
+  };
+
+  const handleGithubSignIN = () => {
+    signInWithGithub()
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+    })
+    .catch(error => console.error('error ', error))
+  }
+  
   return (
     <div className="container w-75 mx-auto mt-5">
         <h2 className="text-center">Please Login</h2>
@@ -24,8 +48,8 @@ const Login = () => {
         </Button>
         <p>Don't have an account? Please <Link to='/register'>Register.</Link></p>
         <div className="">
-            <Button variant="outline-primary" className="d-block mx-auto mb-2"><FcGoogle className="fs-4"></FcGoogle> Sign In With Google</Button>
-            <Button variant="outline-secondary" className="d-block mx-auto"><FaGithub className="fs-4 me-2"></FaGithub>Sign In With Github</Button>
+            <Button onClick={handleGoogleSignIN} variant="outline-primary" className="d-block mx-auto mb-2"><FcGoogle className="fs-4"></FcGoogle> Sign In With Google</Button>
+            <Button onClick={handleGithubSignIN} variant="outline-secondary" className="d-block mx-auto"><FaGithub className="fs-4 me-2"></FaGithub>Sign In With Github</Button>
         </div>
       </Form>
     </div>
