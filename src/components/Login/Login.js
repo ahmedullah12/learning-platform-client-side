@@ -6,16 +6,30 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { useState } from "react";
 
 const Login = () => {
-  const { signInWithGoogle, signInWithGithub, } = useContext(AuthContext);
+  const [error, setError] = useState('')
+  const { signInWithGoogle, signInWithGithub, loginWithEmailAndPassword} = useContext(AuthContext);
 
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
 
-
+    loginWithEmailAndPassword(email, password)
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+    })
+    .catch(error => {
+      console.error('error ', error.message)
+      setError(error.message);
+    })
   }
 
   const handleGoogleSignIN = () => {
@@ -50,13 +64,16 @@ const Login = () => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type="password" name="password" placeholder="Password" />
           </Form.Group>
           <Button className="mb-2" variant="primary" type="submit">
             Login
           </Button>
           <p>
             Don't have an account? Please <Link to="/register">Register.</Link>
+          </p>
+          <p className="text-danger">
+            {error}
           </p>
         </Form>
       </div>
