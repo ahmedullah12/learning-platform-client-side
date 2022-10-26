@@ -1,16 +1,21 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [error, setError] = useState('')
-  const { signInWithGoogle, signInWithGithub, loginWithEmailAndPassword} = useContext(AuthContext);
+  const { signInWithGoogle, signInWithGithub, loginWithEmailAndPassword, setLoading} = useContext(AuthContext);
+  const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
 
 
@@ -24,12 +29,21 @@ const Login = () => {
     loginWithEmailAndPassword(email, password)
     .then(result => {
       const user = result.user;
-      console.log(user)
+      console.log(user);
+      form.reset();
+      setError('')
+      if(user.emailVerified){
+        navigate(from, {replace: true});
+      }
+      else{
+        toast.error('Your email is not verified. Please Verify Your Email')
+      }
     })
     .catch(error => {
       console.error('error ', error.message)
       setError(error.message);
     })
+    .finally(() => setLoading(false));
   }
 
   const handleGoogleSignIN = () => {

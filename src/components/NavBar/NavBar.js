@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { BsFillMoonFill } from "react-icons/bs";
+import { Image } from "react-bootstrap";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import ReactTooltip from "react-tooltip";
 
 
 
 const NavBar = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {})
+    .catch(error => console.error('error ', error))
+  }
   const handleClick = () => {
     // 👇️ toggle
     setIsActive(current => !current);
@@ -40,9 +50,29 @@ const NavBar = () => {
               </div>
               
               
-              <Link className="text-black fw-semibold text-decoration-none me-5" to='/login' href="#memes">
-                Login
-              </Link>
+              <>
+              {
+                  user?.uid ? 
+                  <>
+                    
+                    <button onClick={handleLogOut} className="btn btn-primary">Log Out</button>
+                  </>
+                  :
+                  <>
+                    <Link className="text-decoration-none me-4 text-black"  to='/login'>Login</Link>
+                  </>
+                }
+              </>
+              <Link  to="/profile">
+                {user?.photoURL ? 
+                <div>
+                  <Image className="ms-3" style={{height: "40px"}} roundedCircle src={user.photoURL} data-tip data-for="nameTip"></Image>
+                  <ReactTooltip id="nameTip" place="top" effect="solid">{user.displayName}</ReactTooltip>
+                </div>
+                :
+                <FaUser></FaUser>
+                }
+                </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

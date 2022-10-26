@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext } from 'react';
-import {createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, updateProfile} from 'firebase/auth'
+import {createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth'
 import app from '../../firebase/firebase.init';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -19,20 +19,28 @@ const AuthProvider = ({children}) => {
     const githubProvider = new GithubAuthProvider();
     
     const signInWithGoogle = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
 
     const signInWithGithub = () => {
+        setLoading(true);
         return signInWithPopup(auth, githubProvider);
     };
 
     const signUpWithEmailAndPassword = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
 
     const loginWithEmailAndPassword =(email, password) =>{
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    }
 
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
@@ -47,13 +55,15 @@ const AuthProvider = ({children}) => {
             if(currentUser == null || currentUser.emailVerified){
                 setUser(currentUser);
             }
-            setLoading(false);
+            setLoading(false)
         });
-        return unsubscribe();
+        return () => {
+            unsubscribe();
+        };
     },[])
 
 
-    const authInfo = {user, loading, setLoading, signUpWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithGithub, verifyEmailAdress, updateUserProfile}
+    const authInfo = {user, loading, setLoading, signUpWithEmailAndPassword, loginWithEmailAndPassword, signInWithGoogle, signInWithGithub,logOut, verifyEmailAdress, updateUserProfile}
     return (
         <div>
             <AuthContext.Provider value={authInfo}>
