@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { BsFillMoonFill } from "react-icons/bs";
-import { Image } from "react-bootstrap";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import ReactTooltip from "react-tooltip";
 
@@ -28,7 +27,7 @@ const NavBar = () => {
       <Navbar collapseOnSelect expand="lg" bg="light"  variant="light">
         <Container>
           <img width={"50px"} src="https://i.ibb.co/zGTWS3V/d465b5a0d1b1465b88f32c948ed9eb83.png" alt="" />
-          <Navbar.Brand className="fs-3 ms-0 ms-lg-3" href="/">Learning Buzz</Navbar.Brand>
+          <Link className="fs-3 ms-0 ms-lg-3 text-decoration-none" to='/'>Learning Buzz</Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto mt-3 mt-lg-0">
@@ -39,19 +38,20 @@ const NavBar = () => {
             <Nav className="me-5">
               
                 
-              <div >
+              <div className="my-auto">
                 {
                   isActive ? <FiSun onClick={handleClick} className="fs-4 me-4 " cursor={"pointer"}></FiSun> : <BsFillMoonFill onClick={handleClick} className="fs-4 me-4" cursor={"pointer"}></BsFillMoonFill>
                 }
               </div>
               
               
-              <>
+             <div className="justify-content-end d-flex gap-2 ">
+             <>
               {
                   user?.uid ? 
                   <>
                     
-                    <button onClick={handleLogOut} className="btn btn-primary">Log Out</button>
+                    <button onClick={handleLogOut} className="my-auto btn btn-primary">Log Out</button>
                   </>
                   :
                   <>
@@ -62,13 +62,14 @@ const NavBar = () => {
               <Link  to="/profile">
                 {user?.photoURL ? 
                 <div>
-                  <Image className="ms-3 rounded-circle" style={{width: "30px"}}  src={user.photoURL} data-tip data-for="nameTip"></Image>
+                  <img className="ms-0 my-2 ms-lg-3 rounded-circle" style={{width: "30px"}}  src={user.photoURL} data-tip data-for="nameTip"  alt="userPhoto"/>
                   <ReactTooltip id="nameTip" place="top" effect="solid">{user.displayName}</ReactTooltip>
                 </div>
                 :
                 <FaUser></FaUser>
                 }
                 </Link>
+             </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
