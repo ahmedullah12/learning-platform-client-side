@@ -21,11 +21,7 @@ const NavBar = () => {
     .catch(error => console.error('error ', error))
   }
   const handleClick = () => {
-    // 👇️ toggle
     setIsActive(current => !current);
-
-    // 👇️ or set to true
-    // setIsActive(true);
   };
   return (
     <div>
@@ -45,7 +41,7 @@ const NavBar = () => {
                 
               <div >
                 {
-                  isActive ? <FiSun onClick={handleClick} className="fs-4 me-4"></FiSun> : <BsFillMoonFill className="fs-4 me-4"></BsFillMoonFill>
+                  isActive ? <FiSun onClick={handleClick} className="fs-4 me-4 " cursor={"pointer"}></FiSun> : <BsFillMoonFill onClick={handleClick} className="fs-4 me-4" cursor={"pointer"}></BsFillMoonFill>
                 }
               </div>
               
@@ -66,7 +62,7 @@ const NavBar = () => {
               <Link  to="/profile">
                 {user?.photoURL ? 
                 <div>
-                  <Image className="ms-3" style={{height: "40px"}} roundedCircle src={user.photoURL} data-tip data-for="nameTip"></Image>
+                  <Image className="ms-3 rounded-circle" style={{width: "30px"}}  src={user.photoURL} data-tip data-for="nameTip"></Image>
                   <ReactTooltip id="nameTip" place="top" effect="solid">{user.displayName}</ReactTooltip>
                 </div>
                 :
