@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CourseLeftSideNav = ({title}) => {
-    console.log(title)
+const CourseLeftSideNav = ({course}) => {
+    const {title, id} = course;
+    console.log(title, id);
     return (
         <div className='mb-2'>
-            <Link className='text-decoration-none'>{title}</Link>
+            <Link to={`/courses/${id}`} className='text-decoration-none'>{title}</Link>
             
         </div>
     );

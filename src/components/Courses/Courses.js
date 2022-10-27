@@ -11,13 +11,13 @@ const Courses = () => {
         <div className='mt-5'>
             <Container>
                 <Row>
-                    <Col className='h-full lg-4 '>
+                    <Col lg="2" className='bg-light  pt-5 rounded'>
                         {
-                            courses.map(course => <CourseLeftSideNav key={course.id} title={course.title}></CourseLeftSideNav>)
+                            courses.map(course => <CourseLeftSideNav key={course.id} course={course}></CourseLeftSideNav>)
                         }
                     </Col>
                     <Outlet></Outlet>
-                    <Col className='lg-8'>
+                    <Col lg="9" className=' row row-cols-3'>
                         {
                             courses.map(course => <Course key={course.id} course={course}></Course>)
                         }
