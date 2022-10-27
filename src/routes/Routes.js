@@ -4,6 +4,7 @@ import Courses from "../components/Courses/Courses";
 import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
+import Profile from "../components/Profile/Profile";
 import Register from "../components/Register/Register";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 import Main from "../layout/Main";
@@ -38,6 +39,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/profile',
+                element: <Profile></Profile>
             },
             {
                 path: '/terms',
