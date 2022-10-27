@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
 
 const Course = ({ course }) => {
   console.log(course);
@@ -14,7 +15,7 @@ const Course = ({ course }) => {
           <p className="fs-5 fw-bold">{title}</p>
           <p>Instructor: {instructor_name}</p>
           <p><small>Rating: {rating}</small></p>
-          <Link to={`/courses/${id}`}><Button  className="" variant="primary">Check The Details</Button></Link>
+          <Link to={`/courses/${id}`}><Button  className="" variant="primary">Check The Details <FaArrowRight></FaArrowRight></Button></Link>
         </Card.Body>
       </Card>
     </div>

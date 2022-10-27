@@ -1,8 +1,11 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaArrowRight } from "react-icons/fa";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
 
 const CourseDetails = () => {
   const course = useLoaderData();
@@ -14,16 +17,20 @@ const CourseDetails = () => {
         <Card.Header >
             <div className="d-flex justify-content-between align-items-center">
                 <p className="ms-5 fs-4">{title}</p>
-                <FaDownload className="me-4 fs-4"></FaDownload>
+                <Pdf className="border-none" targetRef={ref}>
+                    {({ toPdf }) => <button className="border-0 ps-4"  onClick={toPdf}><FaDownload className="me-4 fs-4"></FaDownload></button>}
+                </Pdf>
             </div>
         </Card.Header>
-        <Card.Body>
+        <Card.Body ref={ref}>
           <img  width={'70%'} height={"400px"} src={image} alt="" />
           <Card.Text className="fs-5">
             {description}
           </Card.Text>
           <p className="fw-bold">Price: {price}</p>
-          <Button variant="primary">Get Premium Access</Button>
+          <Link to='/check-out'><Button variant="primary">Get Premium Access <FaArrowRight></FaArrowRight></Button></Link>
+          
+          
         </Card.Body>
       </Card>
     </div>

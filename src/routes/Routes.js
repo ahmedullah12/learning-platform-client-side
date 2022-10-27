@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/Blog/Blog";
+import CheckOut from "../components/CheckOut/CheckOut";
 import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Courses from "../components/Courses/Courses";
 import Faq from "../components/Faq/Faq";
@@ -10,6 +11,7 @@ import Register from "../components/Register/Register";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 import Main from "../layout/Main";
 import ErrorPage from "../Pages/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -30,6 +32,10 @@ export const routes = createBrowserRouter([
                 path: '/courses/:id',
                 loader: ({params}) => fetch(`https://assignment-10-server-side-six.vercel.app/courses/${params.id}`),
                 element: <CourseDetails></CourseDetails>
+            },
+            {
+                path: '/check-out',
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
             {
                 path: '/blog',

@@ -20,6 +20,9 @@ const NavBar = () => {
     .catch(error => console.error('error ', error))
   }
   const handleClick = () => {
+    document.body.style.backgroundColor="#000000";
+    document.body.style.color = "#ffffff"
+
     setIsActive(current => !current);
   };
   return (

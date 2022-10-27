@@ -1,3 +1,20 @@
+# Website Name
+The name of this Website is Learning Buzz
+
+# Live Website
+
+# Features and Functionalitites
+* The website is created with React and React Router.
+* This is a Online Programming Language Learning Website.
+* You can see the courses and choose from them.
+* Firebase Authentication is used.
+* There is also Blog and FAQ Page.
+* Bootstrap is used in the Website.
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
