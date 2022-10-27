@@ -10,7 +10,7 @@ const Profile = () => {
             <h3>User Name: {user?.displayName}</h3>
             <p>User Email: {user?.email}</p>
             <p>User Photo: </p>
-            <img src={user?.photoURL} alt="" />
+            <img width={"50%"} src={user?.photoURL} alt="" />
         </div>
     );
 };

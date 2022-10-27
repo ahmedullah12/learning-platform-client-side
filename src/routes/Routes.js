@@ -34,7 +34,8 @@ export const routes = createBrowserRouter([
                 element: <CourseDetails></CourseDetails>
             },
             {
-                path: '/check-out',
+                path: '/check-out/:id',
+                loader: ({params}) => fetch(`https://assignment-10-server-side-six.vercel.app/courses/${params.id}`),
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
             {
