@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import Course from '../Course/Course';
 import CourseLeftSideNav from '../CourseLeftSideNav/CourseLeftSideNav';
 
@@ -16,12 +16,13 @@ const Courses = () => {
                             courses.map(course => <CourseLeftSideNav key={course.id} course={course}></CourseLeftSideNav>)
                         }
                     </Col>
-                    <Outlet></Outlet>
+                    
                     <Col lg="9" className=' row row-cols-3'>
                         {
                             courses.map(course => <Course key={course.id} course={course}></Course>)
                         }
                     </Col>
+                    
                 </Row>
             </Container>
         </div>

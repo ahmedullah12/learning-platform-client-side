@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/Blog/Blog";
+import CourseDetails from "../components/CourseDetails/CourseDetails";
 import Courses from "../components/Courses/Courses";
 import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
@@ -24,6 +25,11 @@ export const routes = createBrowserRouter([
                 path: '/courses',
                 loader: async() => fetch('https://assignment-10-server-side-six.vercel.app/courses'),
                 element: <Courses></Courses>
+            },
+            {
+                path: '/courses/:id',
+                loader: ({params}) => fetch(`https://assignment-10-server-side-six.vercel.app/courses/${params.id}`),
+                element: <CourseDetails></CourseDetails>
             },
             {
                 path: '/blog',
