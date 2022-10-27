@@ -8,17 +8,28 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const [error, setError] = useState('')
-  const { signInWithGoogle, signInWithGithub, loginWithEmailAndPassword, setLoading} = useContext(AuthContext);
+  const { setUser, signInWithGoogle, loginWithGithub, loginWithEmailAndPassword, setLoading} = useContext(AuthContext);
+  const githubProvider = new GithubAuthProvider();
   const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
 
-
+    const handleGitHubLogin = () => {
+      loginWithGithub(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate(from, {replace: true});
+        console.log(user);
+      })
+      .catch(error => console.error('error ', error))
+    }
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -56,15 +67,8 @@ const Login = () => {
       .catch((error) => console.error("error ", error));
   };
 
-  const handleGithubSignIN = () => {
-    signInWithGithub()
-      .then((result) => {
-        const user = result.user;
-        navigate(from, {replace: true});
-        console.log(user);
-      })
-      .catch((error) => console.error("error ", error));
-  };
+  
+  
 
   
 
@@ -102,7 +106,7 @@ const Login = () => {
           <FcGoogle className="fs-4"></FcGoogle> Sign In With Google
         </Button>
         <Button
-          onClick={handleGithubSignIN}
+          onClick={handleGitHubLogin}
           variant="outline-secondary"
           className="d-block mx-auto"
         >

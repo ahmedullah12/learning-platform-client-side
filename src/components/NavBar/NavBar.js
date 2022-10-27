@@ -62,8 +62,8 @@ const NavBar = () => {
               <Link  to="/profile">
                 {user?.photoURL ? 
                 <div>
-                  <img className="ms-0 my-2 ms-lg-3 rounded-circle" style={{width: "30px"}}  src={user.photoURL} data-tip data-for="nameTip"  alt="userPhoto"/>
-                  <ReactTooltip id="nameTip" place="top" effect="solid">{user.displayName}</ReactTooltip>
+                  <img className="ms-0 my-2 ms-lg-3 rounded-circle" style={{width: "30px"}}  src={user?.photoURL} data-tip data-for="nameTip"  alt="userPhoto"/>
+                  <ReactTooltip id="nameTip" place="top" effect="solid">{user?.displayName}</ReactTooltip>
                 </div>
                 :
                 <FaUser></FaUser>
